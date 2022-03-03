@@ -1,0 +1,26 @@
+<div class="container">
+    <main class="form-signin text-center">
+        <form [formGroup]="form" (ngSubmit)="signin()">
+            <a href="#" class=""
+                style="color: #000; font-family: 'Notable', sans-serif; padding-bottom: 10px; font-size: 5vh;">Freelancr.io</a>
+            <h1 class="h3 mt-4 mb-4 fw-normal">Please sign in</h1>
+
+            <div class="form-floating">
+                <input type="email" class="form-control input-group-top" id="floatingInput" placeholder="name@example.com" formControlName="email">
+                <label for="floatingInput">Email address</label>
+              </div>
+            <div class="form-floating mb-2">
+                <input type="password" class="form-control input-group-btm" id="floatingPassword" placeholder="Password" formControlName="password">
+                <label for="floatingPassword">Password</label>
+            </div>
+
+            <mat-error *ngIf="buttonPressed && authFailed">*Credentials wrong.Please try again</mat-error>
+            <mat-error *ngIf="buttonPressed && form.invalid &&!authFailed">*Please fill up credentials properly</mat-error>
+            <!-- <mat-error *ngIf="buttonPressed && (form.get('email')!.hasError('required')||form.get('email')!.hasError('email')) && !form.get('password')!.hasError('required')">*Invalid Email</mat-error> -->
+            <!-- <mat-error *ngIf="buttonPressed && !form.get('email')!.hasError('required') && form.get('password')!.hasError('required')">*Password empty</mat-error> -->
+            <button class="mt-5 w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            <p class="mt-5 mb-3 text-muted">&copy; 2021-2022</p>
+        </form>
+    </main>
+
+</div>

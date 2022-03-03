@@ -1,0 +1,41 @@
+.imageContainer {
+    margin-left:0%;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    height: 100%;
+   
+ }
+ .caption{
+    font-size: 4.5vh;
+    font-family: 'Kanit', sans-serif; font-weight: lighter; 
+    color: black;
+    text-shadow: 3px 3px 3px rgba(235, 235, 235, 1);
+ }
+
+ .center {
+    position: absolute;
+    top: 77%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+ }
+ .bottom {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+ }
+
+ .bg{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-image: url(https://ethereum.org/static/28214bb68eb5445dcb063a72535bc90c/f51a3/hero.png);
+    height:92%;
+    
+    background-position: center;
+    background-size:cover;
+    /* background-attachment:fixed; */
+  }
+

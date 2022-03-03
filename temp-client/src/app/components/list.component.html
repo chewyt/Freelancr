@@ -1,0 +1,112 @@
+<div *ngIf="isOverlay" class="lightbox-overlay">
+</div>
+<div *ngIf="isOverlay" class="lightbox">
+    <h4>Create a new project</h4>
+    <br>
+    <label for="">Project title <span style="color: red;">*</span></label>
+    <div><input type="text" name="" id="" class="form-control" size="50"></div>
+    <br>
+    <label for="">Describe your design brief <span style="color: red;">*</span></label>
+    <div>
+        <textarea name="" id="" cols="30" rows="4" class="form-control"></textarea>
+    </div>
+    <br>
+    <label for="">What type of skills are you looking for? (Up to 3) <span style="color: red;">*</span></label>
+    <div class="row mt-2" style="font-size: 0.8rem;">
+        <div class="col-6">
+            <div class="g-col-6" style="padding: 0.5rem;">
+                <mat-checkbox color="primary">Animation</mat-checkbox>
+            </div>
+            <div class="g-col-6" style="padding: 0.5rem;">
+                <mat-checkbox color="primary">Branding</mat-checkbox>
+            </div>
+            <div class="g-col-6" style="padding: 0.5rem;">
+                <mat-checkbox color="primary">Illustration</mat-checkbox>
+            </div>
+            <!-- <div class="g-col-6" style="padding: 0.5rem;">
+                <mat-checkbox color="primary">UI / Visual Design</mat-checkbox>
+            </div> -->
+        </div>
+        <div class="col-6">
+            <div class="g-col-6" style="padding: 0.5rem;">
+                <mat-checkbox color="primary"> Web Design</mat-checkbox>
+            </div>
+            <div class="g-col-6" style="padding: 0.5rem;">
+                <mat-checkbox color="primary">Mobile Design</mat-checkbox>
+            </div>
+            <!-- <div class="g-col-6" style="padding: 0.5rem;">
+                <mat-checkbox color="primary">Product Design</mat-checkbox>
+            </div> -->
+            <div class="g-col-6" style="padding: 0.5rem;">
+                <mat-checkbox color="primary">UX Design</mat-checkbox>
+            </div>
+        </div>
+    </div>
+    <br>
+    <label for="">What's your budget? <span style="color: red;">*</span></label>
+    <mat-radio-group aria-label="Select an option" [(ngModel)]="budget">
+        <div class="row mt-2" style="font-size: 0.8rem;">
+            <div class="col-6">
+                <div class="g-col-6" style="padding: 0.5rem;">
+                    <mat-radio-button color="primary" value="100">$100 - $1K</mat-radio-button>
+                </div>
+                <div class="g-col-6" style="padding: 0.5rem;">
+                    <mat-radio-button color="primary" value="1000">$1K - $10K</mat-radio-button>
+                </div>
+                <div class="g-col-6" style="padding: 0.5rem;">
+                    <mat-radio-button color="primary" value="10000">$10K - $20K</mat-radio-button>
+                </div>
+        
+            </div>
+            <div class="col-6">
+                <div class="g-col-6" style="padding: 0.5rem;">
+                    <mat-radio-button color="primary" value="20000">$20K - $50K</mat-radio-button>
+                </div>
+                <div class="g-col-6" style="padding: 0.5rem;">
+                    <mat-radio-button color="primary" value="50000">More than $50K</mat-radio-button>
+                </div>
+            </div>
+        </div>
+    </mat-radio-group>
+    <div class=" mt-3 d-flex justify-content-between">
+        <button class="btn btn-secondary btn-sm" (click)="closeOverlay()">Cancel</button>
+        <button class="btn btn-primary btn-sm">Post for free</button>
+    </div>
+
+
+</div>
+
+<app-header></app-header>
+
+
+<div class="container-medium mt-3">
+    <section class="mt-3 row">
+        <div class="col-6 col-md-6 col-sm-6 col-xs-12 d-flex align-items-center ">
+            <div>
+                <h2 style="font-size: 3rem;">Freelance projects for designers</h2>
+                <p class="mt-4" style="font-size: 1.5rem;">The project board is an exclusive resource for contract work. Using smart contracts to handle funds transfer at different stages, freelancers ensure that he gets paid for work done and agencies get quality results on Freelancr</p>
+                <div class="mt-4">
+                    <button class="btn btn-primary" (click)="createProject()">Create new project for free</button>
+                    <!-- <button class="btn btn-secondary" style="margin-left: 50px;">Are you a free lAN</button> -->
+                
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-6 col-sm-6 col-xs-12 d-flex align-items-center justify-content-center">
+            <img src="https://images.ctfassets.net/q33z48p65a6w/6mqb3GCVic9dZqqYZnDB5c/b8c1ed5c556536f073b6f458385312cc/N26-how-to-become-a-freelancer-manny-pantoja.jpg?w=1200&h=645&fit=thumb" alt="" style="border-radius: 40px;" width="80%">
+        </div>
+    </section>
+    <section>
+        <div class="mt-5 mb-3" style="padding-top: 2rem; border-top: 1px solid rgba(0,0,0,0.1) ;">
+            
+            <h3>Recent projects</h3>
+            <p> 10 new projects listed today</p>
+        </div>
+    </section>
+    <section>
+        <div class="col-9 col-md-9 col-sm-9 col-xs-12">
+            
+        </div>
+    </section>
+
+</div>
