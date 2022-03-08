@@ -1,0 +1,93 @@
+<div *ngIf="loading">
+    <div class="lightbox-overlay">
+    </div>
+    <div class="lightbox">
+        <app-blockloading></app-blockloading>        
+    </div>
+</div>
+
+
+
+
+<div *ngIf="!loading">
+    <app-project></app-project>
+    
+    <div class="container-medium" fxLayout="column" fxLayoutAlign=" center" >
+    
+        <div class="col-8" >
+            <div fxLayout="column" fxLayoutAlign=" center" class=" mb-5" >
+                <button class="btn btn-danger w-50 btn-lg" (click)="openDeleteDialogue()" [disabled]="!(temp_status==='released'||temp_status==='initial')">Delete this project</button>
+            </div>
+    
+            <div *ngIf="project.project_status && auth_user.type==='client'">
+                <h3>List of freelancer's requests</h3>
+                <p *ngIf="!finterests.length" class="alert alert-danger">There are currently no indicated interests at this moment.</p>
+                <div *ngFor="let finterest of finterests; let i = index">
+                    <mat-card class="mb-3">
+                        <div class="row">
+                            <div class="col-10">
+    
+                                <div class="d-flex">
+                                    <img src="../../assets/user-icon.png" alt="" style="border-radius: 50%;" height="50px">
+                                    <div class="d-flex flex-column" style="margin-left: 1rem;">
+                                        <div><em>Username :</em> &nbsp;&nbsp;<strong>{{finterest.finterest_freelancer_username}}</strong> </div>
+                                        <p fxLayout="row" fxLayoutAlign=" center" style="color: rgb(219, 187, 2);">
+                                            <span> <mat-icon>star</mat-icon></span> &nbsp; Unlock freelancer details with Pro Business &nbsp;&nbsp;
+                                            <button mat-button color="primary">Explore</button>
+                                        </p>
+    
+                                    </div>
+                                </div>
+    
+    
+                                <p>Budget proposed:&nbsp;<strong>SGD {{finterest.finterest_budget}}</strong></p>
+                                <!-- <p>ID: {{finterest.finterest_id}}</p> -->
+                                <!-- <p>FREELANCER: {{finterest.finterest_freelancer_username}}</p> -->
+                                <p>Additional comments: </p>
+                                <textarea class="form-control" cols="60" rows="2" [value]="finterest.finterest_comments" [disabled]="true"></textarea>
+                            </div>
+                            <div class="col-2"  fxLayout="row" fxLayoutAlign="end center">
+                                <button mat-raised-button color="primary" (click)="createTransaction(i)">Approve</button>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+            <div *ngIf="!project.project_status">
+                <h3>Project updates</h3>
+                <mat-card class="mt-3 mb-3" style="padding: 2rem;">
+                    <div class="row">
+                        <div>
+                            <p>Smart Contract ID:</p>
+                            <p style="font-weight: 550;">{{temp_smart_contract_id}}  <a [href]="'https://rinkeby.etherscan.io/address/'+temp_smart_contract_id" target="_blank">Click to view in etherscan</a></p>
+                            <p *ngIf="auth_user.type=='client'">Freelancer :</p>
+                            <p *ngIf="auth_user.type=='freelancer'">Client :</p>
+                            <p style="font-weight: 550;">{{temp_username}}</p>
+                            <p>Contract amount :</p>
+                            <p style="font-weight: 550;">{{temp_project_cost | currency:"SGD"}}</p>
+                            <p>Project status:</p>
+                            <!-- <p style="font-weight: 550;">{{temp_status | uppercase}}</p> -->
+    
+                            <div fxLayout="row" fxLayoutAlign="space-around center">
+                                <p [ngClass]="temp_status==='funded'?'bold':''">Funded</p>
+                                <p [ngClass]="temp_status==='started'?'bold':''">Started</p>
+                                <p [ngClass]="temp_status==='completed'?'bold':''">Completed</p>
+                                <p [ngClass]="temp_status==='approved'?'bold':''">Approved</p>
+                                <p [ngClass]="temp_status==='released'?'bold':''">Funds Released</p>
+                            </div>
+                            <mat-progress-bar mode="determinate" [value]="progressBar(temp_status)"></mat-progress-bar>
+    
+                        <div  class="mt-5" fxLayout="row" fxLayoutAlign="space-around center">
+                            <button (click)="updateStatus('approved')" *ngIf="auth_user.type==='client'" mat-raised-button color="primary" [disabled]="temp_status!=='completed'">Approve Task</button>
+                            <button (click)="updateStatus('started')" *ngIf="auth_user.type==='freelancer'" mat-raised-button color="primary" [disabled]="temp_status!=='funded'">Start Task</button>
+                            <button (click)="updateStatus('completed')" *ngIf="auth_user.type==='freelancer'" mat-raised-button color="primary" [disabled]="temp_status!=='started'">Complete Task</button>
+                            <button (click)="updateStatus('released')" *ngIf="auth_user.type==='freelancer'" mat-raised-button color="primary" [disabled]="temp_status!=='approved'">Receive Funds</button>
+                        </div>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+        <br><br>
+    </div>
+</div>

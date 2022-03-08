@@ -1,0 +1,150 @@
+<div class="container" *ngIf="toggleView ==='summary'">
+    <p style="position: absolute; top: 8%; right: 8%;
+    transform: translate(0%, 0%);">Already a member? <a href="" [routerLink]="['/signin']">Sign in</a></p>
+    <h2 class="kanit mb-5">Sign up to Freelancr.io</h2>
+    <form [formGroup]="user_summary_form">
+        <table style="width: 100%;">
+            <tr>
+                <td>
+            <tr><strong>Name</strong></tr>
+            <tr><input type="text" name="" class="form-control example-full-width" formControlName="name" size="70%">
+              
+            </tr>
+            <tr>
+                <mat-error *ngIf="user_summary_form.get('name')!.hasError('minlength') && !user_summary_form.get('name')!.hasError('required')">
+                    Name too short</mat-error>
+                <mat-error *ngIf="user_summary_form.get('name')!.hasError('required')&&buttonPressed">
+                    *Mandatory fields
+                </mat-error>
+                <mat-error *ngIf="user_summary_form.get('username')!.hasError('minlength') && !user_summary_form.get('username')!.hasError('required')">
+                   &nbsp;</mat-error>
+                <mat-error *ngIf="user_summary_form.get('username')!.hasError('required')&&buttonPressed">
+                    &nbsp;
+                </mat-error>
+            </tr>
+            </td>
+            <td>
+                <tr><strong>Username</strong></tr>
+                <tr><input type="text" name="" class="form-control example-full-width" formControlName="username"></tr>
+                <tr>
+                    <mat-error *ngIf="user_summary_form.get('username')!.hasError('minlength') && !user_summary_form.get('username')!.hasError('required')">
+                        username too short</mat-error>
+                    <mat-error *ngIf="user_summary_form.get('username')!.hasError('required')&&buttonPressed">
+                        *Mandatory fields
+                    </mat-error>
+                    <mat-error *ngIf="user_summary_form.get('name')!.hasError('minlength') && !user_summary_form.get('name')!.hasError('required')">
+                        &nbsp;</mat-error>
+                    <mat-error *ngIf="user_summary_form.get('name')!.hasError('required')&&buttonPressed">
+                        &nbsp;
+                    </mat-error>
+                </tr>
+            </td>
+            </tr>
+            <br>
+            <tr>
+                <td><strong>Email</strong></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="email" name="" class="form-control" formControlName="email"></td>
+            </tr>
+            <tr>
+                <mat-error *ngIf="user_summary_form.get('email')!.hasError('email') && !user_summary_form.get('email')!.hasError('required')">
+                    Email invalid</mat-error>
+                  <mat-error *ngIf="user_summary_form.get('email')!.hasError('required')&&buttonPressed">*Mandatory fields
+                  </mat-error>
+            </tr>
+            <br>
+            <tr>
+                <td><strong>Password</strong></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="password" name="" class="form-control"
+                        placeholder="8 or more characters required" formControlName="password"></td>
+            </tr>
+            <tr>
+                <mat-error *ngIf="user_summary_form.get('password')!.hasError('minlength') && !user_summary_form.get('password')!.hasError('required')">
+                    password too short</mat-error>
+                <mat-error *ngIf="user_summary_form.get('password')!.hasError('required')&&buttonPressed">
+                    *Mandatory fields
+                </mat-error>
+            </tr>
+            <br>
+            <tr>
+                <td colspan="2"><input type="checkbox" name="" formControlName="checkbox">&nbsp;&nbsp;Creating an
+                    account means you’re okay with
+                    our <a href="#">Terms of Service</a>, <a href="">Privacy Policy</a>, and our default Notification Settings.</td>
+            </tr>
+        </table>
+    </form>
+    <button class=" mt-5 btn btn-primary" (click)="createAccount();"> Create Account</button>
+</div>
+
+<div class="container" *ngIf="toggleView ==='detail'">
+    <div>
+        <h2>Welcome! Let's create your profile</h2>
+        <p>Let others to know you better!</p>
+        <form [formGroup]="user_detail_form">
+            <label for=""><strong>Add an avatar</strong></label>
+
+            <div class="mt-3">
+                <img src="../../assets/user-icon.png" alt="" style="border-radius: 50%;"
+                    height="100px">
+                <input type="file" name="profile_pic" id="img" accept="image/*" style="display: none;">
+                <label for="img" class="btn btn-secondary btn-sm" style="margin-left: 2rem;">Choose image</label>
+            </div>
+
+            <div class="mt-3">
+                <label for=""><strong>Add your location</strong></label>
+                <div class="mt-2">
+                    <input type="text" name="" formControlName="location" class="form-control">
+                </div>
+            </div>
+            <div class="mt-3">
+                <label for="bio" class="form-label"><strong>Add your bio</strong></label>
+                <textarea class="form-control" id="bio" formControlName="bio" rows="3"></textarea>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-secondary btn-sm w-25 mt-3" (click)="toggleSummary()">Back</button>
+                <button class="btn btn-primary btn-sm w-25 mt-3"  [disabled]="user_detail_form.invalid" (click)="confirmProfile()">Next</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<div class="container" *ngIf="toggleView ==='type'">
+    <h2>What brings you here to Freelancr.io?</h2>
+    <mat-radio-group aria-label="Select an option" [(ngModel)]="type">
+    <div class="d-flex">
+            
+            <mat-card  class="hover" style="margin: 1rem;">
+                <div class="text-left">
+                    <mat-radio-button value="freelancer"></mat-radio-button>
+                    <!-- <input class="form-check-input" type="radio" name="radioNoLabel" value="freelancer" aria-label="..." formControlName="type"> -->
+                </div>
+                <div class="text-center"><img src="https://cdn1.vectorstock.com/i/1000x1000/20/20/graphic-cartoon-character-freelancer-vector-35942020.jpg" alt="freelancer" height="300px" style="padding: 0px 50px 0px 50px;border-radius: 49%; "></div>
+                <div class="mt-4 text-center"> 
+                    <h5>Looking for freelance design projects</h5>
+                    
+                </div>
+            </mat-card>
+            <mat-card  class="hover" style="margin: 1rem;">
+                <div>
+                    <mat-radio-button value="client"></mat-radio-button>
+                    <!-- <input class="form-check-input" type="radio" name="radioNoLabel" value="client" aria-label="..." formControlName="type"> -->
+                </div>
+                <div class="text-center">
+                    <img src="https://cdn5.vectorstock.com/i/1000x1000/02/84/professional-architect-or-project-manager-vector-8210284.jpg" alt="" height="300px" style="border-radius: 45%;">
+                </div>
+                
+                <div class="mt-4 text-center"> 
+                    <h5>Hiring design professionals for the job </h5>
+                    
+                </div>
+            </mat-card>
+        </div>
+    </mat-radio-group>
+        <button class="btn btn-success w-25 mt-4" [disabled]="!type" (click)="finishRegistration()">Finish</button>
+        
+    </div>

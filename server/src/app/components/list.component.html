@@ -1,0 +1,121 @@
+<app-header></app-header>
+
+
+<div class="container-medium mt-3">
+    <section class="mt-3 row">
+        <div class="col-6 col-md-6 col-sm-6 col-xs-12 d-flex align-items-center ">
+            <div>
+                <h2 style="font-size: 3rem;">Freelance projects for designers</h2>
+                <p class="mt-4" style="font-size: 1.5rem;">The project board is an exclusive resource for contract work. Using smart contracts to handle funds transfer at different stages, freelancers ensure that he gets paid for work done and agencies get quality results on Freelancr</p>
+                <div class="mt-4">
+                    <button class="btn btn-primary" (click)="createProject()" [disabled]="user_type==='freelancer'">Create new project for free</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-6 col-sm-6 col-xs-12 d-flex align-items-center justify-content-center">
+            <img src="https://images.ctfassets.net/q33z48p65a6w/6mqb3GCVic9dZqqYZnDB5c/b8c1ed5c556536f073b6f458385312cc/N26-how-to-become-a-freelancer-manny-pantoja.jpg?w=1200&h=645&fit=thumb" alt="" style="border-radius: 40px;" width="80%">
+        </div>
+    </section>
+    <section>
+        <div class="mt-5 mb-3" style="padding-top: 2rem; border-top: 1px solid rgba(0,0,0,0.1) ;">
+            
+            <h3>Recent projects</h3>
+            <p> {{project_count}} new projects listed today</p>
+        </div>
+    </section>
+    <section class="row">
+        <div class="col-9">
+            <div>
+                <div *ngFor="let project of projects" (mouseover)="project.hover=true" (mouseleave)="project.hover=false">
+                    <a (click)="viewProject(project.project_id)" >
+                        <div class="hover" style="padding: 1rem; color: black;">
+                                <div class="row">
+                                    <div class="col-1">
+                                        <div class="mt-3">
+                                            <img src="https://tse1.mm.bing.net/th?id=OIP.ht31n3P5rWUvqNWqS5GAOwHaHa&pid=Api&rs=1&c=1&qlt=95&w=120&h=120" alt="" style="border-radius: 50%;" height="50px">
+                                        </div>
+                                    </div>
+                                    <div class="col-9" >
+                                        <div>
+                                            <img src="https://cdn.dribbble.com/assets/redacted-e4cb43ab610b6622e64d3bd721d88bd1cd5488853828e26da5cd4aee071610bf.png" alt="" width="100px">
+                                            <span style="color:#cfcdcd; margin-left: 1rem;">Posted on {{project.project_posted_date | date: "YYYY-MM-dd HH:mm:ss"}}</span>
+                                        </div>
+                                        <div style="font-size: 1.6rem; font-weight: bold;">{{project.project_title}}</div>
+                                        <div style="font-size: 1.2rem;" class="mt-2">{{project.project_brief.substring(0,190)}}...</div>
+                                        <div class="d-flex mt-3" >
+                                            <div *ngFor="let skill of convertSkillsArrayfromJSON(project.project_specialties)">
+                                                <div style="border: 1px solid rgba(0,0,0,0.1); padding: 0.2rem 1rem; border-radius: 7px; margin-right:1rem;">{{skill}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-2"  fxLayout="column" fxLayoutAlign="space-between end">
+                                        <span><strong>{{convertBudgetfromEnum(project.project_budget_range)}}</strong></span>
+                                        
+                                        <button mat-raised-button color="primary" *ngIf="project.hover">View Project</button>
+                                    </div>
+                                </div>
+                        </div>
+                        <mat-divider></mat-divider>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-3">
+            <mat-card style="padding: 1.5rem; border-radius: 1rem;">
+                <form [formGroup]="filterForm">
+                    <mat-card-title>
+                        Filter Results
+                    </mat-card-title>
+                    <mat-card-content>
+                        <input type="text" class="form-control mt-3 mb-4" placeholder="skill, tag or any keyword..." formControlName="search">
+                    </mat-card-content>
+                </form>
+                <mat-card-title>
+                    <div style="border-top: 1px solid rgba(0,0,0,0.2);padding-top: 0.8rem;margin-top: 2rem;">Specialties</div>
+                </mat-card-title>
+                <div class="g-col-6" style="padding: 0.5rem;">
+                    <mat-checkbox color="primary" [(ngModel)]="animation_selection">Animation</mat-checkbox>
+                </div>
+                <div class="g-col-6" style="padding: 0.5rem;">
+                    <mat-checkbox color="primary" [(ngModel)]="branding_selection">Branding</mat-checkbox>
+                </div>
+                <div class="g-col-6" style="padding: 0.5rem;">
+                    <mat-checkbox color="primary" [(ngModel)]="illustration_selection">Illustration</mat-checkbox>
+                </div>
+                <div class="g-col-6" style="padding: 0.5rem;">
+                    <mat-checkbox color="primary" [(ngModel)]="web_selection"> Web Design</mat-checkbox>
+                </div>
+                <div class="g-col-6" style="padding: 0.5rem;">
+                    <mat-checkbox color="primary" [(ngModel)]="mobile_selection">Mobile Design</mat-checkbox>
+                </div>
+                <div class="g-col-6 mb-4" style="padding: 0.5rem;">
+                    <mat-checkbox color="primary" [(ngModel)]="ux_selection">UX Design</mat-checkbox>
+                </div>
+                <mat-card-title>
+                    <div style="border-top: 1px solid rgba(0,0,0,0.2);padding-top: 0.8rem;">Budget</div>
+                </mat-card-title>
+                <div class="g-col-6" style="padding: 0.5rem;">
+                    <mat-checkbox color="primary" [(ngModel)]="b_100to1K_selection">$100 - $1K</mat-checkbox>
+                </div>
+                <div class="g-col-6" style="padding: 0.5rem;">
+                    <mat-checkbox color="primary" [(ngModel)]="b_1Kto10K_selection">$1K - $10K</mat-checkbox>
+                </div>
+                <div class="g-col-6" style="padding: 0.5rem;">
+                    <mat-checkbox color="primary" [(ngModel)]="b_10Kto20K_selection"> $10K - $20K</mat-checkbox>
+                </div>
+                <div class="g-col-6" style="padding: 0.5rem;">
+                    <mat-checkbox color="primary" [(ngModel)]="b_20Kto50K_selection">$20K - $50K</mat-checkbox>
+                </div>
+                <div class="g-col-6" style="padding: 0.5rem;">
+                    <mat-checkbox color="primary" [(ngModel)]="b_over50K_selection">Over $50K</mat-checkbox>
+                </div>
+                <div fxLayoutAlign="center"><button mat-raised-button color="primary" class="mt-3 w-50 mb-3" (click)="filterResults()" >Filter Results</button></div>
+                <div fxLayout="row" fxLayoutAlign="center">
+                    <p  fxLayout="row" fxLayoutAlign="center" style="color: rgb(219, 187, 2);"> <span> <mat-icon>star</mat-icon></span> &nbsp; Unlock filter feature with Pro Business</p>
+                </div>
+            </mat-card>
+        </div>
+    </section>
+    <br><br>
+
+</div>

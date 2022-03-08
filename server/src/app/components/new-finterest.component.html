@@ -1,0 +1,38 @@
+<div *ngIf="isOverlay" class="lightbox-overlay">
+</div>
+<div *ngIf="isOverlay" class="lightbox">
+    
+    <div *ngIf="loading">
+        <app-loading></app-loading>
+    </div>
+    
+    
+    <div *ngIf="!loading">
+        <form [formGroup]="finterestForm" >
+            <h4>Indicate your interest!</h4>
+            <br>
+            <label for="">Your message to the project owner <span style="color: red;">*</span></label>
+            <div>
+                <textarea name="" id="" cols="50" rows="4" class="form-control" formControlName="finterest_comments"></textarea>
+            </div>
+            <br>
+            <div class="alert alert-secondary" fxLayout="row" fxLayoutAlign="space-between center" > 
+                <div>Owner project budget (SGD): <strong>{{project_cost}}</strong></div>
+                 <button class="btn btn-secondary btn-sm" (click)="bargain()"> Bargain</button>
+            </div>
+            <div *ngIf="hasBargain">
+                <label for="">Bargain the price!</label>
+                <input type="number" [value]="project.project_cost" [min]="project_cost" [max]="budget_max" class="form-control" formControlName="finterest_budget">
+                <p style="color: grey; font-size: 0.7rem;"><em>*Leaving empty means accepting above price</em></p>
+            </div>
+        </form>
+            <br>
+            
+            <div class=" mt-3 d-flex justify-content-between">
+                <button class="btn btn-secondary btn-sm" (click)="backtoProject()">Cancel</button>
+                <button class="btn btn-primary btn-sm" (click)="submitInterest()">Accept</button>
+            </div>
+    </div>
+
+
+</div>

@@ -1,0 +1,18 @@
+#error {
+    font-size: 100px;
+    color: rgb(127, 120, 230);
+    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+    margin-top:10%;
+  }
+
+  .bordertop {
+    border-top: 10px rgb(77, 76, 90) solid;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+  }
+  
+  .error{
+    color: yellow;
+    font-weight: bold;
+    
+  }

@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-light bg-white" style="border-bottom: 1px solid rgba(0,0,0,0.1)">
+    <div class="container-fluid">
+        <a href="#" class="navbar-brand" style="font-family: 'Notable', sans-serif; padding-bottom: 10px; font-size: 3vh;">Freelancr.io</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="font-size: 2vh;">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item" style="margin-left: 1rem; margin-right: 0.5rem;">
+                    <a class="nav-link active" aria-current="page" href="#" [routerLink]="['/list']">Find Projects</a>
+                </li>
+                <li class="nav-item" style="margin-right: 0.5rem;">
+                    <a class="nav-link active" aria-current="page" href="" [routerLink]="['/hire']"> Hire Designers</a>
+                </li>
+                <li class="nav-item" style="margin-right: 1.0rem;">
+                    <a class="nav-link disabled" href="#">MarketPlace</a>
+                </li>
+                <li *ngIf="user_type==='client'" class="nav-item" style="margin-right: 0.5rem;">
+                    <a class="nav-link active" aria-current="page" href="" [routerLink]="['/projects/client/',auth_user.user_id]"> My Posted projects</a>
+                </li>
+                <li *ngIf="user_type==='freelancer'" class="nav-item" style="margin-right: 0.5rem;">
+                    <a class="nav-link active" aria-current="page" href="" [routerLink]="['/projects/freelancer/',auth_user.user_id]"> My projects</a>
+                </li>
+                               
+            </ul>
+            <div *ngIf="!isLogin">
+                <ul class="navbar-nav  mb-2 mb-lg-0 navbar-right" style="margin-right: 2rem;">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#" [routerLink]="['/login']" > Sign in / Sign up</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div *ngIf="isLogin">
+                <ul class="navbar-nav  mb-2 mb-lg-0 navbar-right" style="margin-right: 2rem;">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          {{auth_user.username}}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <!-- <li><a class="dropdown-item" href="#">Edit Profile</a></li> -->
+                            <li><a class="dropdown-item" href="#" (click)="signOut()">Sign Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <!-- <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#">Manage <span class="caret"></span></a>
+                </li>
+
+            </ul> -->
+        </div>
+    </div>
+</nav>
+<br><br><br>

@@ -1,0 +1,46 @@
+<app-header></app-header>
+<div class="container-medium">
+    <button class="btn btn-secondary mt-5" (click)="backtoList()"> < Back </button>
+    
+    <div class="d-flex justify-content-center mt-5">
+        <div class="col-8">
+            <div class="d-flex mb-3">
+                <p class="kanit" 
+                style="padding: 0.3rem 2rem;
+                border:1px solid rgba(207, 206, 206,0.2);
+                border-radius: 3px;
+                background-color: rgb(207, 206, 206);">
+                Design Brief</p>
+            </div>
+            <h1>{{project.project_title}}</h1>
+            <p class="mt-5" style="font-size: 1.5rem;">{{project.project_brief}}</p>
+            <button *ngIf="project.project_status" class="btn btn-primary btn-lg mt-4" style="padding-left: 2rem;padding-right: 2rem;" [disabled]="user_type==='client'" [routerLink]="['/finterest/new',project.project_id]">Message owner</button>
+            <mat-card class="mt-5 mb-5" style="padding: 2rem;">
+                <p>Project status to Public</p>
+                <div class="d-flex">
+                    <p *ngIf="project.project_status" class="alert alert-success" style="padding-top: 0.3rem; padding-bottom: 0.3rem;"><strong>OPEN</strong></p>
+                    <p *ngIf="!project.project_status" class="alert alert-danger" style="padding-top: 0.3rem; padding-bottom: 0.3rem;"><strong>CLOSE</strong></p>
+                </div>
+                <p>Date posted</p>
+                <p style="font-weight: 550;">{{project.project_posted_date | date }}</p>
+                <p>Specialties</p>
+                <p style="font-weight: 550;" >{{displaySkills(project.project_specialties.toString()).toString().replace(',',', ')}}</p>
+                <p>Budget</p>
+                <p style="font-weight: 550;" >{{convertBudgetfromEnum(project.project_budget_range)}}</p>
+                <div *ngIf="!hasAuthenticated">
+                    <hr>
+                    <p>About the client</p>
+                    <div class="d-flex">
+                        <img src="https://cdn.dribbble.com/users/845406/avatars/normal/e34bab54aca598764d76accedb5506de.jpg?1431452094&compress=1&resize=64x64" alt="" style="border-radius: 50%;" height="50px">
+                        <div class="d-flex flex-column" style="margin-left: 1rem;">
+                            <div><em>Username :</em> &nbsp;&nbsp;<strong>{{project.username}}</strong></div>
+                            <p fxLayout="row" fxLayoutAlign=" center" style="color: rgb(219, 187, 2);"> <span> <mat-icon>star</mat-icon></span> &nbsp; Unlock client details with Pro Business</p>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+            
+        </div>
+    </div>
+    
+</div>

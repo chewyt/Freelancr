@@ -1,0 +1,36 @@
+<div *ngIf="isOverlay" class="lightbox-overlay">
+</div>
+<div *ngIf="isOverlay" class="lightbox">
+    
+    <div *ngIf="loading">
+        <app-loading></app-loading>
+    </div>
+    
+    
+    <div *ngIf="!loading">
+        <h4>Create a smart contract</h4>
+        <br>
+        
+        <div class="alert alert-secondary"  fxLayout="row" fxLayoutAlign="space-between center" > 
+            <div>Accepted project budget: <strong>{{project_cost | currency:"SGD"}}</strong></div>
+        </div>
+        <div class="d-flex justify-content-center mb-3">
+            <img src="../../assets/T--HZAU-China--arrow.gif" alt="" width="20%">
+        </div>
+        <div class="alert alert-secondary mb-5"  fxLayout="row" fxLayoutAlign="space-between center" > 
+            <div> Calculated contract amount: <strong>{{project_cost_eth.amount | currency:'ETH':'code':'.5-10'}}</strong></div>
+        </div>
+        <div class="text-center" style="font-size: 0.7rem;">Powered by</div>
+        <div class="d-flex justify-content-center">
+            <img src="../../assets/coinAPI_logo.png" alt="" width="50%">
+        </div>
+        <br>
+        
+        <div class=" mt-2 d-flex justify-content-between">
+            <button class="btn btn-secondary btn-sm" (click)="backtoProject()">Cancel</button>
+            <button class="btn btn-primary btn-sm" (click)="createContract()" [disabled]="project_cost_eth==null">Confirm</button>
+        </div>
+    </div>
+
+
+</div>
