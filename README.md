@@ -22,6 +22,7 @@ Configurations required on heroku:
 2. APIKEY_PRIVATE
 
 Following CLI commands needed
+
 `
 git init
 `
