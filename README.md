@@ -4,7 +4,7 @@ Final Project for NUSISS
 
 SETUP steps
 
->>For Database:
+For Database:
 
 Create a database cluster in Digital Ocean
 Connect to MySQL WorkBench to create schema and tables using schema.sql
@@ -12,7 +12,7 @@ Create a user with control access to freelancr database
 Get the connection string of the specified user and add it into SPRING_DATASOURCE_URL of heroku ConfigVARS later
 
 
->>PAAS side:
+PAAS side:
 
 Create a heroku app
 
@@ -25,9 +25,11 @@ Following CLI commands needed
 `
 git init
 `
+
 `
 git commit
 `
+
 `
 git remote add heroku [heroku git url]
 `
@@ -35,6 +37,7 @@ git remote add heroku [heroku git url]
 `
 git push heroku main
 `
+
 `
 heroku open
 `
